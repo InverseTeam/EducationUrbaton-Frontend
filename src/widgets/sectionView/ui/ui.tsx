@@ -10,7 +10,7 @@ import EditPen from '../../../../public/globalIcons/editPen.svg';
 import { Feedbacks } from '@/features/feedbacks';
 import { GroupCard } from '@/features/groupCard';
 import { GroupItems } from '../data';
-import { GroupCreateCard } from '@/features/groupCreateCard';
+import { GroupCreateCard } from '@/features/createCard';
 export const SectionView = ({ id }: { id: number }) => {
     const router = useRouter();
     return (
@@ -48,7 +48,7 @@ export const SectionView = ({ id }: { id: number }) => {
                         {GroupItems.map((item) => (
                             <GroupCard key={item.id} item={item} />
                         ))}
-                        <GroupCreateCard />
+                        <GroupCreateCard title="Добавить группу" />
                     </div>
                 </section>
             </Layout>
