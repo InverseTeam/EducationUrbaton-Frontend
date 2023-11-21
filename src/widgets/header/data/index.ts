@@ -8,12 +8,12 @@ import Profile from '../../../../public/navicons/profile.svg';
 export const SideNavBarItems: SideNavItem[] = [
     {
         title: 'Секции',
-        path: '/sections',
+        path: '/section',
         icon: Briefcase,
         submenu: true,
         subMenuItems: [
-            { title: 'Новая секция', path: '/projects' },
-            { title: 'Мои секции', path: '/projects/web-design' },
+            { title: 'Новая секция', path: '/section/create' },
+            { title: 'Мои секции', path: '/section/my' },
         ],
     },
     {

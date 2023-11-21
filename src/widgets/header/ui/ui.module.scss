@@ -8,7 +8,7 @@ $headerBorderRight: 1px solid rgba(0, 0, 0, 0.1);
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    gap: 12px;
+    gap: 20px;
 
     left: 0;
     top: 0;
@@ -26,5 +26,11 @@ $headerBorderRight: 1px solid rgba(0, 0, 0, 0.1);
         justify-content: space-between;
         width: 100%;
         height: 100%;
+
+        .items {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
     }
 }

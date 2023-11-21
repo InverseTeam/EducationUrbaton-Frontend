@@ -42,10 +42,8 @@ export const NavItem = ({ item }: { item: SideNavItem }) => {
                                     <Link
                                         key={idx}
                                         href={subItem.path}
-                                        className={`${
-                                            subItem.path === pathname
-                                                ? styles.item__active
-                                                : styles.item
+                                        className={`${styles.item} ${
+                                            subItem.path === pathname ? styles.item__active : ''
                                         }`}>
                                         <span>{subItem.title}</span>
                                     </Link>

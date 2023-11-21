@@ -5,8 +5,8 @@ body {
 }
 
 body {
-    color: #222;
-    background: #fff;
+    color: inherit;
+    background: #f8f9fb;
 }
 
 a {
@@ -44,7 +44,7 @@ h3,
     box-sizing: border-box;
     font-family: inherit;
     font-weight: 400;
-    color: #222;
+    color: inherit;
 
     -webkit-tap-highlight-color: transparent;
 }

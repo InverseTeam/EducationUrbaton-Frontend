@@ -1,0 +1,50 @@
+.card {
+    display: flex;
+    max-width: 280px;
+    flex-direction: column;
+    cursor: pointer;
+    .info {
+        gap: 16px;
+        padding: 16px;
+        display: flex;
+        flex-direction: column;
+        border-radius: 16px;
+        background: #fff;
+        margin-top: -10px;
+
+        .title {
+            font-size: 16px;
+            font-style: normal;
+            font-weight: 500;
+            line-height: normal;
+        }
+    }
+
+    .cover {
+        z-index: -1;
+        display: flex;
+        padding-left: 16px;
+        padding-right: 16px;
+        justify-content: space-between;
+        align-items: center;
+        background-color: #1d336f;
+        border-radius: 16px 16px 0 0;
+        height: 100px;
+        .buttonLayout {
+            height: 100%;
+            padding-top: 16px;
+            display: flex;
+            align-items: flex-start;
+            .category {
+                display: inline-flex;
+                padding: 4px 8px;
+                justify-content: center;
+                align-items: center;
+
+                border-radius: 4px;
+                background: #4077f2;
+                color: #fff;
+            }
+        }
+    }
+}
