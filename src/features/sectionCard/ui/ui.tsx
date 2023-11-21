@@ -3,28 +3,36 @@
 import { Button, ThemeContext, ThemeFactory } from '@skbkontur/react-ui';
 import styles from './ui.module.scss';
 import Image from 'next/image';
-import Asset from '../../../../public/python.svg';
-import { Section } from '@/shared/interface/sectionCard';
+import { Section } from '@/shared/interface/section';
+import Link from 'next/link';
+
 export const SectionCard = ({ item }: { item: Section }) => {
     return (
         <>
             <ThemeContext.Provider value={SectionCardTheme}>
-                <article className={styles.card}>
+                <Link href={`/section/my/${item.id}`} className={styles.card}>
                     <section className={styles.cover}>
                         <div className={styles.buttonLayout}>
-                            <button className={styles.category}>Технические</button>
+                            {item.category?.map((category) => (
+                                <button key={category.id} className={styles.category}>
+                                    {category.name}
+                                </button>
+                            ))}
                         </div>
-                        <Image src={Asset} width={91} height={85} alt="Card Logo" />
+                        <Image src={item.cover} width={91} height={85} alt="Card Logo" />
                     </section>
                     <section className={styles.info}>
-                        <h4 className={styles.title}>Программирование на Python</h4>
-                        <div>
-                            <Button borderless use="primary" size="small">
-                                ИК-144
-                            </Button>
+                        <h4 className={styles.title}>{item.name}</h4>
+                        <div className={styles.groupRow}>
+                            {item.groups &&
+                                item.groups.map((group) => (
+                                    <Button key={group.id} borderless use="primary" size="small">
+                                        {group.name}
+                                    </Button>
+                                ))}
                         </div>
                     </section>
-                </article>
+                </Link>
             </ThemeContext.Provider>
         </>
     );

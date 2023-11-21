@@ -1,5 +1,6 @@
 .card {
     display: flex;
+    min-width: 270px;
     max-width: 280px;
     flex-direction: column;
     cursor: pointer;
@@ -17,6 +18,11 @@
             font-style: normal;
             font-weight: 500;
             line-height: normal;
+        }
+
+        .groupRow {
+            display: flex;
+            gap: 8px;
         }
     }
 

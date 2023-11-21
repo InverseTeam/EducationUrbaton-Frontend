@@ -1,0 +1,31 @@
+.card {
+    border-radius: 8px;
+    border: 2px dashed #4077f2;
+
+    width: 360px;
+    height: 152px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    cursor: pointer;
+
+    transition: all 0.3s;
+    &:hover {
+        background-color: #f4f4f4;
+    }
+    .create {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 16px;
+
+        .blue {
+            font-size: 18px;
+            font-style: normal;
+            font-weight: 500;
+            color: #4077f2;
+        }
+    }
+}
