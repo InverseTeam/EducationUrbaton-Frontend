@@ -1,0 +1,30 @@
+$headerBgColor: #e5ecfd;
+$headerBorderRight: 1px solid rgba(0, 0, 0, 0.1);
+
+.header__layout {
+    border-right: $headerBorderRight;
+    background: $headerBgColor;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 12px;
+
+    left: 0;
+    top: 0;
+    height: 100vh;
+    width: 270px;
+    padding: 24px;
+
+    .header__logo {
+        width: 100%;
+    }
+
+    .header__items {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        width: 100%;
+        height: 100%;
+    }
+}

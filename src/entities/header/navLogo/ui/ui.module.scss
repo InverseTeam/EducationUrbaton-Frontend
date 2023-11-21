@@ -1,0 +1,22 @@
+$productColor: #4077f2;
+
+.layout {
+    display: flex;
+    gap: 2px;
+
+    .inverse {
+        color: #222;
+        font-size: 22px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: normal;
+        letter-spacing: 0.22px;
+    }
+    .product {
+        color: $productColor;
+        font-size: 22px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: normal;
+    }
+}

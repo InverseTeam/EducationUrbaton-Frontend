@@ -1,0 +1,106 @@
+$elementBgActive: #c7d7fa;
+$elementTitle: #222;
+.element {
+    display: flex;
+    padding: 10px 12px;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    align-self: stretch;
+
+    border-radius: 8px;
+    background: transparent;
+    transition: all 0.3s;
+    cursor: pointer;
+    &:hover {
+        background: $elementBgActive;
+    }
+
+    .element__icon {
+        display: flex;
+        height: 22px;
+    }
+
+    .element__title {
+        color: $elementTitle;
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 400;
+        margin-left: 12px;
+        align-self: center;
+    }
+
+    .element__arrow {
+        display: flex;
+        height: 16px;
+        overflow: auto;
+        text-align: right;
+    }
+}
+
+.element__item__list {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+
+    .item {
+        display: flex;
+        width: 200px;
+        padding: 4px 8px 4px 40px;
+        align-items: center;
+        gap: 8px;
+
+        border-radius: 8px;
+
+        color: $elementTitle;
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 400;
+    }
+
+    .item__active {
+        background: $elementBgActive;
+    }
+}
+
+.item__default {
+    display: flex;
+    width: 200px;
+    padding: 10px 12px;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    border-radius: 8px;
+    transition: all 0.3s;
+    cursor: pointer;
+    &:hover {
+        background: $elementBgActive;
+    }
+}
+
+.item__default__active {
+    display: flex;
+    width: 200px;
+    padding: 10px 12px;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    border-radius: 8px;
+    transition: all 0.3s;
+    cursor: pointer;
+    background: $elementBgActive;
+}
+
+.item__default__element__title {
+    color: $elementTitle;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    align-self: center;
+}
+
+.element__active {
+    background: $elementBgActive;
+}
