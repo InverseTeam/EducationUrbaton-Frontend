@@ -1,10 +1,13 @@
 export interface User {
     id: number;
     email: string;
-    class: Class;
-    school: School;
-    achievements: Achievements[];
-    password: string;
+    firstname: string;
+    surname: string;
+    surdname: string;
+    class?: Class;
+    school?: School;
+    achievements?: Achievements[];
+    password?: string;
 }
 
 export interface School {

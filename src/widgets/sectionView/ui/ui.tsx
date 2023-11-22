@@ -9,8 +9,9 @@ import Arrow from '../../../../public/globalIcons/arrow.svg';
 import EditPen from '../../../../public/globalIcons/editPen.svg';
 import { Feedbacks } from '@/features/feedbacks';
 import { GroupCard } from '@/features/groupCard';
-import { GroupItems } from '../data';
+import { GroupItems, RatingItems } from '../data';
 import { GroupCreateCard } from '@/features/createCard';
+import { SectionRating } from '@/features/sectionRating';
 export const SectionView = ({ id }: { id: number }) => {
     const router = useRouter();
     return (
@@ -50,6 +51,10 @@ export const SectionView = ({ id }: { id: number }) => {
                         ))}
                         <GroupCreateCard title="Добавить группу" />
                     </div>
+                </section>
+                <section className={styles.groups}>
+                    <h2 className={styles.title}>Рейтинг</h2>
+                    <SectionRating items={RatingItems} />
                 </section>
             </Layout>
         </>

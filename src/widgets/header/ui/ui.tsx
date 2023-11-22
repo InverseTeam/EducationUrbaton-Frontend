@@ -5,10 +5,11 @@ import Link from 'next/link';
 import { SideNavBarItems, UnderSideNavBarItems } from '../data';
 import { NavItem } from '@/entities/header/navItem';
 import { NavLogo } from '@/entities/header/navLogo';
+import { CSSProperties } from 'react';
 
-export const Header = () => {
+export const Header = ({ style }: { style?: CSSProperties }) => {
     return (
-        <header className={styles.header__layout}>
+        <header style={style} className={styles.header__layout}>
             <section className={styles.header__logo}>
                 <NavLogo />
             </section>
