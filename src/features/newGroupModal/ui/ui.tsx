@@ -12,8 +12,8 @@ import {
 import React, { useEffect, useRef } from 'react';
 import { Button } from '@skbkontur/react-ui';
 import styles from './ui.module.scss';
-import { Divider } from '@/entities/divider';
-import { Text } from '@/entities/text';
+import { Divider } from '../../../entities/divider';
+import { Text } from '../../../entities/text';
 import { ModelNewGroup } from '../model';
 import { PlusIcon16Regular } from '@skbkontur/icons/PlusIcon16Regular';
 import { TrashCanIcon16Regular } from '@skbkontur/icons/TrashCanIcon16Regular';
