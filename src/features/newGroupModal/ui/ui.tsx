@@ -12,11 +12,11 @@ import {
 import React, { useEffect, useRef } from 'react';
 import { Button } from '@skbkontur/react-ui';
 import styles from './ui.module.scss';
-import { Divider } from '../../../entities/divider';
-import { Text } from '../../../entities/text';
 import { ModelNewGroup } from '../model';
-import { PlusIcon16Regular } from '@skbkontur/icons/PlusIcon16Regular';
-import { TrashCanIcon16Regular } from '@skbkontur/icons/TrashCanIcon16Regular';
+import { Text } from '@/entities/Text';
+import { Divider } from '@/entities/Divider';
+// import { PlusIcon16Regular } from '@skbkontur/icons/PlusIcon16Regular';
+// import { TrashCanIcon16Regular } from '@skbkontur/icons/TrashCanIcon16Regular';
 export const NewGroupModal = ({ setModalOpen }: { setModalOpen?: (value: boolean) => void }) => {
     const {
         dataNewGroup,
@@ -122,7 +122,7 @@ export const NewGroupModal = ({ setModalOpen }: { setModalOpen?: (value: boolean
                                     <Button
                                         use="text"
                                         size="medium"
-                                        icon={<PlusIcon16Regular />}
+                                        // icon={<PlusIcon16Regular />}
                                         onClick={handleAddDayInput}>
                                         День занятий
                                     </Button>
@@ -131,7 +131,8 @@ export const NewGroupModal = ({ setModalOpen }: { setModalOpen?: (value: boolean
                                     <Button
                                         use="text"
                                         size="medium"
-                                        icon={<TrashCanIcon16Regular />}>
+                                        // icon={<TrashCanIcon16Regular />}
+                                        >
                                         Удалить день
                                     </Button>
                                 </ThemeContext.Provider>

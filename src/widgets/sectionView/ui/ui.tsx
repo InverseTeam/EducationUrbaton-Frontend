@@ -16,10 +16,9 @@ import { useState } from 'react';
 import { NewGroupModal } from '@/features/newGroupModal';
 export const SectionView = ({ id }: { id: number }) => {
     const router = useRouter();
-    const [modalOpen, setModalOpen] = useState<boolean>(false);
+    
     return (
         <>
-            {modalOpen && <NewGroupModal setModalOpen={() => setModalOpen(false)} />}
             <Layout>
                 <section className={styles.header}>
                     <Title title="Вернуться на предыдущую страницу" onClick={() => router.back()}>
@@ -55,7 +54,7 @@ export const SectionView = ({ id }: { id: number }) => {
                             <GroupCard key={item.id} item={item} />
                         ))}
                         <GroupCreateCard
-                            onClick={() => setModalOpen(true)}
+                            onClick={() => {}}
                             title="Добавить группу"
                         />
                     </div>

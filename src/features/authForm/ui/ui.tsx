@@ -3,10 +3,28 @@
 import { NavLogo } from '@/entities/header/navLogo';
 import styles from './ui.module.scss';
 import { Button, Input, ThemeContext, ThemeFactory, Tooltip } from '@skbkontur/react-ui';
-import { useEffect, useState } from 'react';
+import { FormEvent, useEffect, useState } from 'react';
+import { useAuthUserMutation } from '../api/authApi';
+import { IAuth } from '@/shared/interface/auth.interface';
+import { useRouter } from 'next/navigation';
 
 export const AuthForm = () => {
-    const [formData, setFormData] = useState({
+    const [login, { error, isLoading }] = useAuthUserMutation();
+    const router = useRouter();
+
+    const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+
+        console.log('sumbit');
+        const responseAuth = await login(formData as IAuth);
+        console.log('respons', responseAuth);
+
+        //TODO: еще необходимо сохранить токен в localstorage
+
+        router.push('/section/my');
+    };
+
+    const [formData, setFormData] = useState<IAuth>({
         email: '',
         password: '',
     });
@@ -27,7 +45,7 @@ export const AuthForm = () => {
         <>
             <ThemeContext.Provider value={AuthTheme}>
                 <Tooltip render={TooltipFormRender} pos="right middle">
-                    <form className={styles.form}>
+                    <form className={styles.form} onSubmit={handleSubmit}>
                         <NavLogo />
                         <span className={styles.input}>
                             <Input
@@ -53,6 +71,7 @@ export const AuthForm = () => {
                             disabled={btnDisabled}
                             size="large"
                             borderless
+                            type="submit"
                             style={{ marginTop: '4px' }}>
                             Войти
                         </Button>
