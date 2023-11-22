@@ -1,0 +1,43 @@
+.layout {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .title {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+
+        .position {
+            color: #fff;
+            font-size: 15px;
+            font-style: normal;
+            font-weight: 500;
+        }
+
+        .userName {
+            color: #222;
+            font-size: 16px;
+            font-style: normal;
+            font-weight: 400;
+        }
+    }
+    .group {
+        color: #222;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 400;
+    }
+
+    .points {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        .text {
+            color: #222;
+            font-size: 16px;
+            font-style: normal;
+            font-weight: 500;
+        }
+    }
+}
