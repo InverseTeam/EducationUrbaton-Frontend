@@ -30,7 +30,9 @@ const LabGrotesque = localFont({
 export default function RootLayout({ children }: { children: React.ReactNode }) {
     return (
         <html lang="ru">
-            <body className={LabGrotesque.className}>{children}</body>
+            <body className={LabGrotesque.className}>
+              {children}
+            </body>
         </html>
     );
 }
