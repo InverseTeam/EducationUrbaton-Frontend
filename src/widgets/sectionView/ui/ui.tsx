@@ -12,8 +12,8 @@ import { GroupCard } from '@/features/groupCard';
 import { GroupItems, RatingItems } from '../data';
 import { GroupCreateCard } from '@/features/createCard';
 import { SectionRating } from '@/features/sectionRating';
-import { NewGroupModal } from '@/widgets/newGroupModal';
 import { useState } from 'react';
+import { NewGroupModal } from '@/features/newGroupModal';
 export const SectionView = ({ id }: { id: number }) => {
     const router = useRouter();
     const [modalOpen, setModalOpen] = useState<boolean>(false);

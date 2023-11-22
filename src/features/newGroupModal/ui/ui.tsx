@@ -12,7 +12,6 @@ import {
 import React, { useEffect, useRef } from 'react';
 import { Button } from '@skbkontur/react-ui';
 import styles from './ui.module.scss';
-//import PlusIcon from '@/entities/icons/PlusIcon/PlusIcon';
 import { Divider } from '@/entities/divider';
 import { Text } from '@/entities/text';
 import { ModelNewGroup } from '../model';
