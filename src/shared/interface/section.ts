@@ -28,6 +28,7 @@ export interface Group {
 export interface Category {
     id: number;
     name: string;
+    isSelect?: boolean;
 }
 
 export interface Grade {

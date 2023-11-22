@@ -29,6 +29,7 @@ export const SectionView = ({ id }: { id: number }) => {
                     <Title>Программирование на Python</Title>
                     <Image
                         style={{ cursor: 'pointer', marginLeft: '8px' }}
+                        onClick={() => router.push(`/section/my/${id}/change`)}
                         src={EditPen}
                         width={28}
                         height={28}
