@@ -55,6 +55,7 @@ export const ModelNewGroup = () => {
 
 useEffect(()=>{
     setDataNewGroup({...dataNewGroup, lessonDays: lessonDays })
+// eslint-disable-next-line react-hooks/exhaustive-deps
 }, [lessonDays])
 
 
@@ -74,6 +75,7 @@ useEffect(()=>{
 
         }
 
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [dataNewGroup])
 
     return {
