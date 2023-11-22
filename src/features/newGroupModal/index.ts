@@ -1,1 +1,1 @@
-export { NewGroupModal } from './ui/ui'
+export { NewGroupModal } from './ui/ui';
