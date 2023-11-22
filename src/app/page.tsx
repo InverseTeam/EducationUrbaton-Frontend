@@ -1,5 +1,9 @@
-import { Header } from '@/widgets/header';
+import { Auth } from '@/widgets/auth';
 
 export default function Home() {
-    return <>Привет // flows/my</>;
+    return (
+        <>
+            <Auth />
+        </>
+    );
 }
