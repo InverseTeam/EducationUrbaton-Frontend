@@ -4,7 +4,7 @@ import { NavLogo } from '@/entities/header/navLogo';
 import styles from './ui.module.scss';
 import { Button, Input, ThemeContext, ThemeFactory, Tooltip } from '@skbkontur/react-ui';
 import { FormEvent, useEffect, useState } from 'react';
-import { useAuthUserMutation } from '../api/authApi';
+import { useAuthUserMutation } from '../api';
 import { IAuth } from '@/shared/interface/auth.interface';
 import { useRouter } from 'next/navigation';
 
