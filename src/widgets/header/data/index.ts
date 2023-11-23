@@ -20,11 +20,7 @@ export const SideNavBarItems: SideNavItem[] = [
         title: 'Новости',
         path: '/news',
         icon: Mouthpiece,
-        submenu: true,
-        subMenuItems: [
-            { title: 'Все новости', path: '/settings/account' },
-            { title: 'Мои новости', path: '/settings/privacy' },
-        ],
+        submenu: false,
     },
     {
         title: 'Заявки',

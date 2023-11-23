@@ -13,10 +13,11 @@ import React, { useEffect, useRef } from 'react';
 import { Button } from '@skbkontur/react-ui';
 import styles from './ui.module.scss';
 import { ModelNewGroup } from '../model';
-import { Text } from '@/entities/Text';
-import { Divider } from '@/entities/Divider';
-// import { PlusIcon16Regular } from '@skbkontur/icons/PlusIcon16Regular';
-// import { TrashCanIcon16Regular } from '@skbkontur/icons/TrashCanIcon16Regular';
+import { Text } from '@/entities/text';
+import { Divider } from '@/entities/divider';
+import { PlusIcon } from '@/entities/icons/plus';
+import { BinIcon } from '@/entities/icons/bin';
+
 export const NewGroupModal = ({ setModalOpen }: { setModalOpen?: (value: boolean) => void }) => {
     const {
         dataNewGroup,
@@ -41,12 +42,13 @@ export const NewGroupModal = ({ setModalOpen }: { setModalOpen?: (value: boolean
     useEffect(() => {
         if (!!warnText) handleClickOnShow();
     }, [warnText]);
+    //TODO: нужно сделать изменяемый ModalHeader / Text
     return (
         <ThemeContext.Provider value={newGroupModalTheme}>
             <Modal onClose={modalClose}>
                 <div className={styles.modalWrap}>
                     <Modal.Header>
-                        <Text size={24} type="h1" weight={700}>
+                        <Text size={24} type="h2" weight={700}>
                             Новая группа
                         </Text>
                     </Modal.Header>
@@ -122,17 +124,13 @@ export const NewGroupModal = ({ setModalOpen }: { setModalOpen?: (value: boolean
                                     <Button
                                         use="text"
                                         size="medium"
-                                        // icon={<PlusIcon16Regular />}
+                                        icon={<PlusIcon />}
                                         onClick={handleAddDayInput}>
                                         День занятий
                                     </Button>
                                 </Tooltip>
                                 <ThemeContext.Provider value={deleteButtonTheme}>
-                                    <Button
-                                        use="text"
-                                        size="medium"
-                                        // icon={<TrashCanIcon16Regular />}
-                                        >
+                                    <Button use="text" size="medium" icon={<BinIcon />}>
                                         Удалить день
                                     </Button>
                                 </ThemeContext.Provider>
