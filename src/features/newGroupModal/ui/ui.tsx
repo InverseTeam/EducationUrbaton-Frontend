@@ -13,9 +13,11 @@ import React, { useEffect, useRef } from 'react';
 import { Button } from '@skbkontur/react-ui';
 import styles from './ui.module.scss';
 import { ModelNewGroup } from '../model';
+//@ts-ignore
 import { Divider } from '@/entities/Divider';
 import { PlusIcon } from '@/entities/icons/plus';
 import { BinIcon } from '@/entities/icons/bin';
+//@ts-ignore
 import { Text } from '@/entities/Text';
 
 export const NewGroupModal = ({ setModalOpen }: { setModalOpen?: (value: boolean) => void }) => {

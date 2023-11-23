@@ -13,7 +13,7 @@ export interface User {
 export interface School {
     id: number;
     name: string;
-    classes: Class[];
+    classes?: Class[];
 }
 
 export interface Class {
