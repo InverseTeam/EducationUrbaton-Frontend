@@ -1,4 +1,4 @@
-import { IToken, IAuth } from '@/shared/interface/auth.interface';
+import { IToken, IAuth } from '@/shared/interface/auth';
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
 export const authApi = createApi({

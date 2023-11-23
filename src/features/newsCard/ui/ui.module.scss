@@ -1,0 +1,50 @@
+.card {
+    display: flex;
+    width: 500px;
+    height: 170px;
+    padding: 16px 14px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+
+    border-radius: 16px;
+    background: #fff;
+
+    .header {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        .user {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 4px;
+
+            .fullname {
+                font-size: 18px;
+                font-style: normal;
+                font-weight: 500;
+                line-height: normal;
+                color: #4077f2;
+            }
+            .newsTime {
+                font-size: 16px;
+                font-style: normal;
+                font-weight: 400;
+                line-height: normal;
+                color: #757575;
+            }
+        }
+    }
+    .main {
+        width: 100%;
+        .message {
+            font-size: 16px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: normal;
+            letter-spacing: 0.32px;
+            color: #222;
+        }
+    }
+}

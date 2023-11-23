@@ -52,9 +52,11 @@ export const ModelNewGroup = () => {
         //     lessonDays[lessonDays.length - 1].timeEnd !== '';
         // setWarnText(!isFilled);
 
+
         lessonDays.length !== 1 && setLessonDays((lessonDays) =>
             lessonDays.filter((_, index) => index !== lessonDays.length - 1),
         );
+
     };
     const handleChangeLessonsDayInput = (index: number, name: string, value: string) => {
         setWarnText(false);
@@ -100,6 +102,6 @@ export const ModelNewGroup = () => {
         days,
         warnText,
         handleAddDayInput,
-        handleDeleteDayInput
+        handleDeleteDayInput,
     };
 };

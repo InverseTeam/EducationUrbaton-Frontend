@@ -5,7 +5,7 @@ import styles from './ui.module.scss';
 import { Button, Input, ThemeContext, ThemeFactory, Tooltip } from '@skbkontur/react-ui';
 import { FormEvent, useEffect, useState } from 'react';
 import { useAuthUserMutation } from '../api';
-import { IAuth } from '@/shared/interface/auth.interface';
+import { IAuth } from '@/shared/interface/auth';
 import { useRouter } from 'next/navigation';
 
 export const AuthForm = () => {
