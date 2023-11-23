@@ -27,6 +27,7 @@ export const NewGroupModal = ({ setModalOpen }: { setModalOpen?: (value: boolean
         days,
         warnText,
         handleAddDayInput,
+        handleDeleteDayInput
     } = ModelNewGroup();
     const tooltipRef = useRef<Tooltip | null>(null);
     function modalClose() {
@@ -132,6 +133,7 @@ export const NewGroupModal = ({ setModalOpen }: { setModalOpen?: (value: boolean
                                         use="text"
                                         size="medium"
                                         // icon={<TrashCanIcon16Regular />}
+                                        onClick={handleDeleteDayInput}
                                         >
                                         Удалить день
                                     </Button>
