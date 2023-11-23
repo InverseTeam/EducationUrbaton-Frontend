@@ -6,7 +6,7 @@ import { Title } from '@/entities/pageTitle';
 import { Checkbox, DropdownMenu, Textarea, ThemeFactory, ThemeContext } from '@skbkontur/react-ui';
 import { Button, MenuItem } from '@skbkontur/react-ui';
 import { useState } from 'react';
-import { GroupItems } from '../data';
+import { GroupItems, NewsItems } from '../data';
 import { Text } from '@/entities/text';
 import { ArrowsIcon } from '@/entities/icons/arrows';
 import { NewsCard } from '@/features/newsCard';
@@ -65,7 +65,9 @@ export const News: React.FC = () => {
                             </Button>
                         </div>
                         <div className={styles.row}>
-                            <NewsCard />
+                            {NewsItems.map((item) => (
+                                <NewsCard item={item} key={item.id} />
+                            ))}
                         </div>
                     </section>
                 </Layout>
