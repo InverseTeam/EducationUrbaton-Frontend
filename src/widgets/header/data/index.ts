@@ -36,14 +36,8 @@ export const SideNavBarItems: SideNavItem[] = [
 
 export const UnderSideNavBarItems: SideNavItem[] = [
     {
-        title: 'Настройки',
-        path: '/settings',
-        icon: Settings,
-        submenu: false,
-    },
-    {
         title: 'Профиль',
-        path: '/settings',
+        path: '/profile',
         icon: Profile,
         submenu: false,
     },
