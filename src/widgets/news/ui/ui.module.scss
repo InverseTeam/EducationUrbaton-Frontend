@@ -1,0 +1,23 @@
+.group {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.news {
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 16px;
+
+    .header {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+    }
+    .row {
+        display: flex;
+        align-items: flex-start;
+        flex-wrap: wrap;
+    }
+}
