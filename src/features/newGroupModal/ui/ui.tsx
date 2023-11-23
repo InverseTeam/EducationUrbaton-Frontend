@@ -13,10 +13,10 @@ import React, { useEffect, useRef } from 'react';
 import { Button } from '@skbkontur/react-ui';
 import styles from './ui.module.scss';
 import { ModelNewGroup } from '../model';
-import { Text } from '@/entities/text';
 import { Divider } from '@/entities/divider';
 import { PlusIcon } from '@/entities/icons/plus';
 import { BinIcon } from '@/entities/icons/bin';
+import { Text } from '@/entities/text';
 
 export const NewGroupModal = ({ setModalOpen }: { setModalOpen?: (value: boolean) => void }) => {
     const {
@@ -28,6 +28,7 @@ export const NewGroupModal = ({ setModalOpen }: { setModalOpen?: (value: boolean
         days,
         warnText,
         handleAddDayInput,
+        handleDeleteDayInput,
     } = ModelNewGroup();
     const tooltipRef = useRef<Tooltip | null>(null);
     function modalClose() {
@@ -130,7 +131,12 @@ export const NewGroupModal = ({ setModalOpen }: { setModalOpen?: (value: boolean
                                     </Button>
                                 </Tooltip>
                                 <ThemeContext.Provider value={deleteButtonTheme}>
-                                    <Button use="text" size="medium" icon={<BinIcon />}>
+                                    <Button
+                                        use="text"
+                                        size="medium"
+                                        // icon={<TrashCanIcon16Regular />}
+                                        onClick={handleDeleteDayInput}
+                                        icon={<BinIcon />}>
                                         Удалить день
                                     </Button>
                                 </ThemeContext.Provider>
