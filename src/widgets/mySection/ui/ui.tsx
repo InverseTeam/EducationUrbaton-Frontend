@@ -1,16 +1,24 @@
+"use client"
+
 import { Title } from '@/entities/pageTitle';
 import styles from './ui.module.scss';
 import { SectionCard } from '@/features/sectionCard';
-import { Section } from '@/shared/interface/section';
-import { SectionItems } from '../data';
+import { ISection, Section } from '@/shared/interface/section';
 import { Layout } from '@/shared/layout/page';
+import { useGetAllSectionsQuery } from '@/features/section/api';
 export const MySection = () => {
+
+    const {data: SectionItems, isLoading} = useGetAllSectionsQuery();
+
+    console.log()
+
     return (
         <>
             <Layout>
                 <Title>Мои секции</Title>
                 <div className={styles.cardWrap}>
-                    {SectionItems.map((item: Section) => (
+
+                    {SectionItems && SectionItems.map((item: ISection) => (
                         <SectionCard key={item.id} item={item} />
                     ))}
                 </div>

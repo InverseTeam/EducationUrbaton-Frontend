@@ -1,17 +1,14 @@
-import { sectionApi } from "./sectionApi"
+import { ISection } from '@/shared/interface/section';
+import { sectionApi } from './sectionApi';
 
 const getAllSectionsApi = sectionApi.injectEndpoints({
-  endpoints: (build) => ({
-    getAllSections: build.query({
-      query: () =>  ({
-        url: '/section/',
-        method: 'GET',
-       
-      }),
-      providesTags: ['SectionData'],
+    endpoints: (build) => ({
+        getAllSections: build.query<ISection[], void>({
+            query: () => '/sections/',
+            providesTags: ['SectionData'],
+        }),
     }),
-  }),
-  overrideExisting: false,  
-})
+    overrideExisting: false,
+});
 
-export const { useGetAllSectionsQuery } = getAllSectionsApi
+export const { useGetAllSectionsQuery } = getAllSectionsApi;

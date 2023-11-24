@@ -1,12 +1,12 @@
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 import { useState } from 'react';
-import { SideNavItem } from '@/shared/interface/headers';
+import { IHeaderItem } from '@/shared/interface/header';
 import Image from 'next/image';
 import Arrow from '../../../../../public/navicons/arrow.svg';
 import styles from './ui.module.scss';
 
-export const NavItem = ({ item }: { item: SideNavItem }) => {
+export const NavItem = ({ item }: { item: IHeaderItem }) => {
     const pathname = usePathname();
     const [subMenuOpen, setSubMenuOpen] = useState(false);
     const toggleSubMenu = () => {

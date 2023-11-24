@@ -1,8 +1,8 @@
-import { Rating } from '@/shared/interface/rating';
+import { IRating } from '@/shared/interface/rating';
 import styles from './ui.module.scss';
 import { SectionRatingElement } from '@/entities/sectionRatingElement';
 
-export const SectionRating = ({ items }: { items?: Rating[] }) => {
+export const SectionRating = ({ items }: { items?: IRating[] }) => {
     const sortedRatings = items && [...items].sort((a, b) => b.points - a.points);
     return (
         <div className={styles.layout}>

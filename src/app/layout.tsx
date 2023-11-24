@@ -23,7 +23,7 @@ const LabGrotesque = localFont({
         },
         {
             path: '../../public/fonts/LabGrotesque-Bold.woff2',
-            weight: 'bold',
+            weight: '700',
             style: 'normal',
         },
     ],
@@ -33,9 +33,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     return (
         <html lang="ru">
             <body className={LabGrotesque.className}>
-            <StyledComponentsRegistry>
-                <Providers>{children}</Providers>
-            </StyledComponentsRegistry>
+                <StyledComponentsRegistry>
+                    <Providers>{children}</Providers>
+                </StyledComponentsRegistry>
             </body>
         </html>
     );

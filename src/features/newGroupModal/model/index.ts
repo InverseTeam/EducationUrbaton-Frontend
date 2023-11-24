@@ -1,16 +1,5 @@
+import { IDataNewGroup, ILessonDay } from '@/shared/interface/lesson';
 import { useEffect, useState } from 'react';
-
-interface ILessonDay {
-    day: string | null;
-    timeStart: string;
-    timeEnd: string;
-}
-
-interface IDataNewGroup {
-    name: string;
-    maxStudent: string;
-    lessonDays: ILessonDay[];
-}
 
 export const ModelNewGroup = () => {
     const [filled, setFilled] = useState(false);
@@ -52,9 +41,10 @@ export const ModelNewGroup = () => {
         //     lessonDays[lessonDays.length - 1].timeEnd !== '';
         // setWarnText(!isFilled);
 
-        lessonDays.length !== 1 && setLessonDays((lessonDays) =>
-            lessonDays.filter((_, index) => index !== lessonDays.length - 1),
-        );
+        lessonDays.length !== 1 &&
+            setLessonDays((lessonDays) =>
+                lessonDays.filter((_, index) => index !== lessonDays.length - 1),
+            );
     };
     const handleChangeLessonsDayInput = (index: number, name: string, value: string) => {
         setWarnText(false);
@@ -100,6 +90,6 @@ export const ModelNewGroup = () => {
         days,
         warnText,
         handleAddDayInput,
-        handleDeleteDayInput
+        handleDeleteDayInput,
     };
 };

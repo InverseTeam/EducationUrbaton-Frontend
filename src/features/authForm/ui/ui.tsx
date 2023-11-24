@@ -5,24 +5,44 @@ import styles from './ui.module.scss';
 import { Button, Input, ThemeContext, ThemeFactory, Tooltip } from '@skbkontur/react-ui';
 import { FormEvent, useEffect, useState } from 'react';
 import { useAuthUserMutation } from '../api';
-import { IAuth } from '@/shared/interface/auth.interface';
+import { IAuth, IError, IResponseAuth } from '@/shared/interface/auth';
 import { useRouter } from 'next/navigation';
+import { useDispatch } from 'react-redux';
+import { sectionApi } from '@/features/section/api/sectionApi';
 
 export const AuthForm = () => {
     const [login, { error, isLoading }] = useAuthUserMutation();
     const router = useRouter();
+    const dispatch = useDispatch();
 
     const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
-        console.log('sumbit');
-        const responseAuth = await login(formData as IAuth);
-        console.log('respons', responseAuth);
+        dispatch(sectionApi.util.resetApiState());
+        if (typeof window !== 'undefined') {
+            localStorage.removeItem('token');
 
-        //TODO: еще необходимо сохранить токен в localstorage
+            console.log(formData)
+
+            const responseAuth = await login(formData as IAuth);
+
+        
+            const tokenAuth = (responseAuth as IResponseAuth).data?.auth_token;
+
+            localStorage.setItem('token', tokenAuth);
+        }
 
         router.push('/section/my');
     };
+
+    useEffect(() => {
+        if (error) {
+          const errorStatus = (error as IError).status;
+          if (errorStatus == 400) {
+            alert('Неверный логин или пароль');
+          }
+        }
+      }, [error]);
 
     const [formData, setFormData] = useState<IAuth>({
         email: '',

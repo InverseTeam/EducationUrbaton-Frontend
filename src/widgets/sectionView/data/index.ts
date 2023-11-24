@@ -1,4 +1,4 @@
-import { Rating } from '@/shared/interface/rating';
+import { IRating } from '@/shared/interface/rating';
 import { Group } from '@/shared/interface/section';
 
 export const GroupItems: Group[] = [
@@ -36,7 +36,7 @@ export const GroupItems: Group[] = [
     },
 ];
 
-export const RatingItems: Rating[] = [
+export const RatingItems: IRating[] = [
     {
         id: 0,
         rating: 1,

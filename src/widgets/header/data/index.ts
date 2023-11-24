@@ -1,11 +1,11 @@
-import { SideNavItem } from '@/shared/interface/headers';
+import { IHeaderItem } from '@/shared/interface/header';
 import Briefcase from '../../../../public/navicons/briefcase.svg';
 import Mouthpiece from '../../../../public/navicons/mouthpiece.svg';
 import Notes from '../../../../public/navicons/notes.svg';
 import Settings from '../../../../public/navicons/settings.svg';
 import Profile from '../../../../public/navicons/profile.svg';
 
-export const SideNavBarItems: SideNavItem[] = [
+export const SideNavBarItems: IHeaderItem[] = [
     {
         title: 'Секции',
         path: '/section',
@@ -26,24 +26,14 @@ export const SideNavBarItems: SideNavItem[] = [
         title: 'Заявки',
         path: '/flows',
         icon: Notes,
-        submenu: true,
-        subMenuItems: [
-            { title: 'Все заявки', path: '/settings/account' },
-            { title: 'Мои заявки', path: '/settings/privacy' },
-        ],
+        submenu: false,
     },
 ];
 
-export const UnderSideNavBarItems: SideNavItem[] = [
-    {
-        title: 'Настройки',
-        path: '/settings',
-        icon: Settings,
-        submenu: false,
-    },
+export const UnderSideNavBarItems: IHeaderItem[] = [
     {
         title: 'Профиль',
-        path: '/settings',
+        path: '/profile',
         icon: Profile,
         submenu: false,
     },

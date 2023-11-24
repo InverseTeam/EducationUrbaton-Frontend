@@ -1,8 +1,8 @@
 import { User } from './user';
 
-export interface Rating {
+export interface IRating {
     id: number;
     rating: number;
-    user: User;
+    user: User; // TODO: change to IUser
     points: number;
 }

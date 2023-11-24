@@ -1,8 +1,9 @@
 import { BASE_API } from '@/shared/constants';
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query';
+import { ISection } from '@/shared/interface/section';
+import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
 export const sectionApi = createApi({
-    reducePath: 'section',
+    reducerPath: 'section',
     baseQuery: fetchBaseQuery({
         baseUrl: BASE_API,
         headers: {
@@ -14,5 +15,6 @@ export const sectionApi = createApi({
 
     tagTypes: ['SectionData'],
 
-    endpoint: () => ({}),
+    endpoints: () => ({}),
 });
+
