@@ -1,11 +1,11 @@
-import { SideNavItem } from '@/shared/interface/headers';
+import { IHeaderItem } from '@/shared/interface/header';
 import Briefcase from '../../../../public/navicons/briefcase.svg';
 import Mouthpiece from '../../../../public/navicons/mouthpiece.svg';
 import Notes from '../../../../public/navicons/notes.svg';
 import Settings from '../../../../public/navicons/settings.svg';
 import Profile from '../../../../public/navicons/profile.svg';
 
-export const SideNavBarItems: SideNavItem[] = [
+export const SideNavBarItems: IHeaderItem[] = [
     {
         title: 'Секции',
         path: '/section',
@@ -30,7 +30,7 @@ export const SideNavBarItems: SideNavItem[] = [
     },
 ];
 
-export const UnderSideNavBarItems: SideNavItem[] = [
+export const UnderSideNavBarItems: IHeaderItem[] = [
     {
         title: 'Профиль',
         path: '/profile',
