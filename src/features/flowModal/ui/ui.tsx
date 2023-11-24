@@ -16,17 +16,19 @@ export const FlowModal = ({ setModalOpen }: { setModalOpen?: (value: boolean) =>
                             Заявка на секцию
                         </Text>
                     </Modal.Header>
+
                     <Modal.Body className={styles.layout}>
+                        <div className={styles.divider}> </div>
                         <Text size={18} type="h3" weight={500}>
                             Данные законного представителя
                         </Text>
                         <section className={styles.section}>
                             <Text size={16} type="h4" weight={400}>
-                                <span className={styles.title}>СНИЛС: </span> Романова Ольга
+                                <span className={styles.title}>ФИО: </span> Романова Ольга
                                 Миххайловна
                             </Text>
                             <Text size={16} type="h4" weight={400}>
-                                <span className={styles.title}>Снилс: </span> 123-345-678 89
+                                <span className={styles.title}>СНИЛС: </span> 123-345-678 89
                             </Text>
                             <Text size={16} type="h4" weight={400}>
                                 <span className={styles.title}>Телефон: </span> +79169809898
@@ -37,11 +39,11 @@ export const FlowModal = ({ setModalOpen }: { setModalOpen?: (value: boolean) =>
                         </Text>
                         <section className={styles.section}>
                             <Text size={16} type="h4" weight={400}>
-                                <span className={styles.title}>СНИЛС: </span> Романова Ольга
+                                <span className={styles.title}>ФИО: </span> Романова Ольга
                                 Миххайловна
                             </Text>
                             <Text size={16} type="h4" weight={400}>
-                                <span className={styles.title}>Снилс: </span> 123-345-678 89
+                                <span className={styles.title}>СНИЛС: </span> 123-345-678 89
                             </Text>
                             <Text size={16} type="h4" weight={400}>
                                 <span className={styles.title}>Телефон: </span> +79169809898
@@ -50,9 +52,12 @@ export const FlowModal = ({ setModalOpen }: { setModalOpen?: (value: boolean) =>
                         <Text size={18} type="h3" weight={500}>
                             Документы
                         </Text>
-                        <section className={styles.section}>
+                        <section style={{ marginTop: '-8px' }} className={styles.section}>
                             <FlowCard isModal />
                         </section>
+                        <div style={{ marginTop: '-8px' }} className={styles.divider}>
+                            {' '}
+                        </div>
                     </Modal.Body>
                     <Modal.Footer>
                         <section className={styles.footer}>
