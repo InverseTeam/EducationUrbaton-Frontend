@@ -1,8 +1,8 @@
-import { Rating } from '@/shared/interface/rating';
+import { IRating } from '@/shared/interface/rating';
 import styles from './ui.module.scss';
 import Flash from '../../../../public/globalIcons/flash.svg';
 import Image from 'next/image';
-export const SectionRatingElement = ({ item, rating }: { item?: Rating; rating: number }) => {
+export const SectionRatingElement = ({ item, rating }: { item?: IRating; rating: number }) => {
     return (
         <div className={styles.layout}>
             <span className={styles.title}>
