@@ -1,2 +1,2 @@
-export * from './getAllSections'
+export * from './getSections'
 export * from './sectionApi'

@@ -11,7 +11,10 @@ export const sectionApi = createApi({
                 typeof window !== 'undefined' ? localStorage.getItem('token') : ''
             }`,
         },
+        
+        
     }),
+    
 
     tagTypes: ['SectionData'],
 

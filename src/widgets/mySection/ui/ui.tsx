@@ -10,7 +10,14 @@ export const MySection = () => {
 
     const {data: SectionItems, isLoading} = useGetAllSectionsQuery();
 
-    console.log()
+
+    const test = SectionItems?.map((section: ISection) => ({
+        id: section.id,
+    }))
+
+    console.log("test",test)
+
+
 
     return (
         <>

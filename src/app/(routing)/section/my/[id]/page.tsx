@@ -1,16 +1,39 @@
+
+import { useGetAllSectionsQuery } from '@/features/section/api';
+import { ISection } from '@/shared/interface/section';
 import { SectionView } from '@/widgets/sectionView';
 
 export async function generateStaticParams() {
-    const posts = [{ id: '1' }, { id: '2' }, { id: '3' }, { id: '4' }, { id: '5' }]; // только пример для проверки работоспособности
-    //TODO: написать запрос на получение всех секций для получения всех id секций
-    return posts.map((post) => ({
-        id: post.id,
-    }));
+    try {
+        const sections: ISection[] = await fetch('https://inverse-tracker.ru/api/sections/', {
+            method: 'GET',
+            headers: {
+                Authorization: `Token ${localStorage.getItem('token')}`, //TODO: токен нету на момент сборки надо решать
+            },
+        })
+        .then((res) => res.json())
+        .catch((err) => {
+            console.error(err);
+            return [{id: '4'}];
+        });
+
+        console.log("build",sections);
+        return sections?.map((section: ISection) => ({
+            id: section.id.toString(),
+        })) || [{id: '4'}];
+    } catch (error) {
+        console.error(error);
+        return [{id: '4'}];
+    }
 }
 
-export default function OneSection({ params }: { params: { id: number } }) {
+
+export default function OneSection({ params }: { params: { id: string } }) {
+    // console.log(SectionItems);
+
     return (
         <>
+
             <SectionView id={params.id} />
         </>
     );

@@ -12,9 +12,14 @@ import { GroupCard } from '@/features/groupCard';
 import { GroupItems, RatingItems } from '../data';
 import { GroupCreateCard } from '@/features/createCard';
 import { SectionRating } from '@/features/sectionRating';
+import { useGetSectionQuery } from '@/features/section/api';
 
-export const SectionView = ({ id }: { id: number }) => {
+export const SectionView = ({ id }: { id: string  }) => {
     const router = useRouter();
+
+    // const {data: SectionData, isLoading} = useGetSectionQuery(id);
+    
+    // console.log(SectionData)
 
     return (
         <>
