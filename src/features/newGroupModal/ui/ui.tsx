@@ -13,12 +13,10 @@ import React, { useEffect, useRef } from 'react';
 import { Button } from '@skbkontur/react-ui';
 import styles from './ui.module.scss';
 import { ModelNewGroup } from '../model';
-//@ts-ignore
-import { Divider } from '@/entities/Divider';
 import { PlusIcon } from '@/entities/icons/plus';
 import { BinIcon } from '@/entities/icons/bin';
-//@ts-ignore
-import { Text } from '@/entities/Text';
+import { Text } from '@/entities/text';
+import { Divider } from '@/entities/divider';
 
 export const NewGroupModal = ({ setModalOpen }: { setModalOpen?: (value: boolean) => void }) => {
     const {
@@ -136,7 +134,6 @@ export const NewGroupModal = ({ setModalOpen }: { setModalOpen?: (value: boolean
                                     <Button
                                         use="text"
                                         size="medium"
-                                        // icon={<TrashCanIcon16Regular />}
                                         onClick={handleDeleteDayInput}
                                         icon={<BinIcon />}>
                                         Удалить день
