@@ -1,4 +1,4 @@
-import { User } from './user';
+import { ISchool, IUser, User } from './user';
 // TODO: убрать "?", когда будем добавлять бекенд
 export interface Section {
     id: number;
@@ -44,4 +44,53 @@ export interface Homework {
     theme: string;
     homework_type: string;
     date: string;
+}
+
+/********************************************************************************************** */
+
+export interface ISection {
+    id: number;
+    name: string;
+    cover: string;
+    description: string;
+    category: ICategory;
+    address: string;
+    author: IUser;
+    students: IUser[];
+    groups: IGroup[];
+    grades: IGrade[];
+    homeworks: IHomework[];
+    school: ISchool;
+    rating: number;
+    comments: number;
+}
+
+export interface ICategory {
+    id: number;
+    name: string;
+}
+
+export interface IGroup {
+    id: number;
+    name: string;
+    teacher: IUser;
+    students: IUser[];
+    time: string;
+    total_students: number;
+    max_students: number;
+}
+
+export interface IHomework {
+    id: number;
+    theme: string;
+    homework_type: string;
+    date: string;
+}
+
+export interface IGrade {
+    id: number;
+    theme: string;
+    grade: number;
+    date: string;
+    student: IUser[];
 }

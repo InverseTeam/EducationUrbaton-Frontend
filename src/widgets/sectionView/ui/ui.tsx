@@ -12,11 +12,10 @@ import { GroupCard } from '@/features/groupCard';
 import { GroupItems, RatingItems } from '../data';
 import { GroupCreateCard } from '@/features/createCard';
 import { SectionRating } from '@/features/sectionRating';
-import { useState } from 'react';
-import { NewGroupModal } from '@/features/newGroupModal';
+
 export const SectionView = ({ id }: { id: number }) => {
     const router = useRouter();
-    
+
     return (
         <>
             <Layout>
@@ -53,10 +52,7 @@ export const SectionView = ({ id }: { id: number }) => {
                         {GroupItems.map((item) => (
                             <GroupCard key={item.id} item={item} />
                         ))}
-                        <GroupCreateCard
-                            onClick={() => {}}
-                            title="Добавить группу"
-                        />
+                        <GroupCreateCard onClick={() => {}} title="Добавить группу" />
                     </div>
                 </section>
                 <section className={styles.groups}>
