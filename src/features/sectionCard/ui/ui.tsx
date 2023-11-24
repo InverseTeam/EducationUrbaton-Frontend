@@ -15,7 +15,12 @@ export const SectionCard = ({ item }: { item: ISection }) => {
                         <div className={styles.buttonLayout}>
                             <button className={styles.category}>{item.category.name}</button>
                         </div>
-                        <Image src={item.cover || Python} width={91} height={85} alt="Card Logo" />
+                        <Image
+                            src={item.category.cover || Python}
+                            width={91}
+                            height={85}
+                            alt="Card Logo"
+                        />
                     </section>
                     <section className={styles.info}>
                         <h4 className={styles.title}>{item.name}</h4>

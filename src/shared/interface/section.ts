@@ -51,7 +51,6 @@ export interface Homework {
 export interface ISection {
     id: number;
     name: string;
-    cover: string;
     description: string;
     category: ICategory;
     address: string;
@@ -68,16 +67,20 @@ export interface ISection {
 export interface ICategory {
     id: number;
     name: string;
+    cover: string;
+    isSelect?: boolean;
 }
 
 export interface IGroup {
-    id: number;
+    id: number | null;
     name: string;
     teacher: IUser;
     students: IUser[];
     time: string;
-    total_students: number;
-    max_students: number;
+    schedule: ISchedule[];
+    total_students: number | null;
+    max_students: number | null;
+    address?: string | undefined;
 }
 
 export interface IHomework {
@@ -85,6 +88,13 @@ export interface IHomework {
     theme: string;
     homework_type: string;
     date: string;
+}
+
+export interface ISchedule {
+    id: number | null;
+    week_day?: string | null; // number
+    start_time: string;
+    end_time: string;
 }
 
 export interface IGrade {

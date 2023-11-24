@@ -3,36 +3,99 @@
 import { Layout } from '@/shared/layout/page';
 import styles from './ui.module.scss';
 import { Title } from '@/entities/pageTitle';
-import { Button, Input, Textarea, ThemeContext, ThemeFactory } from '@skbkontur/react-ui';
+import { Button, Input, Textarea, ThemeContext, ThemeFactory, Toast } from '@skbkontur/react-ui';
 import { CategoryItem } from '@/entities/categoryItem';
-import { Category } from '@/shared/interface/section';
-import { useState } from 'react';
+import { ICategory, IGroup } from '@/shared/interface/section';
+import { useEffect, useState } from 'react';
 import { GroupCreateCard } from '@/features/createCard';
 import { NewGroupModal } from '@/features/newGroupModal';
 import { useRouter } from 'next/navigation';
-import { CategoryItems } from '../data';
+
+import { GetSectionCategories, daysOfWeek, selectedCategory, updateDaysOfWeek } from '../model';
+import { useSelector } from 'react-redux';
+import { RootState } from '@/shared/lib/store/store';
+import { GroupCard } from '@/features/groupCard';
+import { instanceLogged } from '@/shared/axios';
 
 export const SectionCreate = () => {
     const router = useRouter();
-    const [categories, setCategories] = useState<Category[]>(CategoryItems);
+    const [categories, setCategories] = useState<ICategory[]>([]);
+    const [address, setAddress] = useState<string>('');
+    const [name, setName] = useState<string>('');
+    const [description, setDescription] = useState<string>('');
     const [modalOpen, setModalOpen] = useState<boolean>(false);
+    const [btnDisabled, setBtnDisabled] = useState<boolean>(true);
+
+    useEffect(() => {
+        const GetCategories = async () => {
+            const fetchCategories: ICategory[] = await GetSectionCategories();
+            setCategories(fetchCategories);
+        };
+        GetCategories();
+    }, []);
     const handleSelect = (id: number) => {
-        const updatedRectangles = categories.map((category) => ({
+        const updatedRectangles = categories?.map((category) => ({
             ...category,
             isSelect: category.id === id,
         }));
-
         setCategories(updatedRectangles);
     };
+    const createdGroups = useSelector((state: RootState): IGroup[] | undefined => {
+        return state.newGroupReducer?.map((group) => ({
+            ...group,
+            address: address,
+        }));
+    });
+    const createGroup = () => {
+        if (address.length > 0) {
+            setModalOpen(true);
+        } else
+            Toast.push('Заполните поле с адресом', {
+                label: 'Окей',
+                handler: () => Toast.push('Спасибо!'),
+            });
+    };
+    useEffect(() => {
+        if (name.length > 0 && description.length > 0 && address.length > 0) {
+            setBtnDisabled(false);
+        } else setBtnDisabled(true);
+    }, [address.length, description.length, name.length]);
 
+    /* REQUEST */
+
+    const handleCreateSection = async () => {
+        const requestData = {
+            name: name,
+            description: description,
+            category: categories && selectedCategory(categories),
+            address: address,
+            groups:
+                createdGroups?.map(({ address, ...rest }) => updateDaysOfWeek(rest, daysOfWeek)) ||
+                [],
+        };
+        try {
+            await instanceLogged.post('/sections/create/', requestData);
+        } catch (error) {
+            console.log(error);
+        }
+    };
     return (
         <>
             {modalOpen && <NewGroupModal setModalOpen={() => setModalOpen(false)} />}
             <Layout>
                 <Title>Новая секция</Title>
                 <section className={styles.input}>
-                    <Input maxLength={50} width={'450px'} size="large" placeholder="Название" />
+                    <Input
+                        onValueChange={setName}
+                        value={name}
+                        maxLength={50}
+                        width={'450px'}
+                        size="large"
+                        placeholder="Название"
+                    />
                     <Textarea
+                        onValueChange={setDescription}
+                        value={description}
                         autoResize
                         size="large"
                         lengthCounter={300}
@@ -45,32 +108,43 @@ export const SectionCreate = () => {
                         maxLength={100}
                         width={'512px'}
                         size="large"
+                        value={address}
+                        onValueChange={setAddress}
                         placeholder="Адрес проведения"
                     />
                 </section>
                 <section className={styles.category}>
                     <h2 className={styles.title}>Направление</h2>
                     <ul className={styles.row}>
-                        {categories.map((item: Category, index) => (
-                            <CategoryItem item={item} onSelect={handleSelect} key={index} />
-                        ))}
+                        {Array.isArray(categories)
+                            ? categories?.map((item: ICategory, index) => (
+                                  <CategoryItem item={item} onSelect={handleSelect} key={index} />
+                              ))
+                            : categories && (
+                                  <CategoryItem item={categories} onSelect={handleSelect} />
+                              )}
                     </ul>
                 </section>
                 <section className={styles.groups}>
                     <h2 className={styles.title}>Группы</h2>
                     <div className={styles.groupWrap}>
-                        <GroupCreateCard
-                            onClick={() => setModalOpen(true)}
-                            title="Добавить группу"
-                        />
+                        {createdGroups?.map((item, index) => (
+                            <GroupCard key={index} item={item} />
+                        ))}
+                        <GroupCreateCard onClick={createGroup} title="Добавить группу" />
                     </div>
                 </section>
                 <section className={styles.btns}>
                     <ThemeContext.Provider value={sectionChangeTheme}>
-                        <Button borderless use="primary" size="large">
+                        <Button
+                            onClick={handleCreateSection}
+                            disabled={btnDisabled}
+                            borderless
+                            use="primary"
+                            size="large">
                             Сохранить изменения
                         </Button>
-                        <Button onClick={() => router.back()} size="large">
+                        <Button onClick={() => router.push('/section/my')} size="large">
                             Отменить
                         </Button>
                     </ThemeContext.Provider>
@@ -83,4 +157,5 @@ export const SectionCreate = () => {
 const sectionChangeTheme = ThemeFactory.create({
     btnBorderRadiusLarge: '8px',
     btnPrimaryBg: '#4077F2',
+    btnDisabledBg: '#AFC5F7',
 });

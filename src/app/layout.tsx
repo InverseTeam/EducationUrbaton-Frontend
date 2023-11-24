@@ -1,4 +1,4 @@
-import { Providers } from '@/shared/lib/store/provider/provider';
+import { Providers } from '@/shared/lib/store/provider';
 import './globals.scss';
 import type { Metadata } from 'next';
 import localFont from 'next/font/local';
