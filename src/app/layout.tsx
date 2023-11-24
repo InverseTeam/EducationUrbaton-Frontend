@@ -2,6 +2,7 @@ import { Providers } from '@/shared/lib/store/provider/provider';
 import './globals.scss';
 import type { Metadata } from 'next';
 import localFont from 'next/font/local';
+import StyledComponentsRegistry from './registry';
 
 export const metadata: Metadata = {
     title: 'Inverse Образование',
@@ -32,7 +33,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     return (
         <html lang="ru">
             <body className={LabGrotesque.className}>
+            <StyledComponentsRegistry>
                 <Providers>{children}</Providers>
+            </StyledComponentsRegistry>
             </body>
         </html>
     );

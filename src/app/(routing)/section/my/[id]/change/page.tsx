@@ -1,6 +1,6 @@
 import { SectionChange } from '@/widgets/sectionChange';
 
-export default function Create({ params }: { params: { id: number } }) {
+export default function Edit({ params }: { params: { id: number } }) {
     return (
         <>
             <SectionChange />
