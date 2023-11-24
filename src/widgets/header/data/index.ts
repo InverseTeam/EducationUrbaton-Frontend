@@ -26,11 +26,7 @@ export const SideNavBarItems: SideNavItem[] = [
         title: 'Заявки',
         path: '/flows',
         icon: Notes,
-        submenu: true,
-        subMenuItems: [
-            { title: 'Все заявки', path: '/settings/account' },
-            { title: 'Мои заявки', path: '/settings/privacy' },
-        ],
+        submenu: false,
     },
 ];
 

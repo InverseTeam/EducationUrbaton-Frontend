@@ -22,7 +22,7 @@ const LabGrotesque = localFont({
         },
         {
             path: '../../public/fonts/LabGrotesque-Bold.woff2',
-            weight: 'bold',
+            weight: '700',
             style: 'normal',
         },
     ],
