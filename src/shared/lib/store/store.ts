@@ -1,7 +1,6 @@
 import { authApi } from '@/features/authForm/api';
 import { sectionApi } from '@/features/section/api/sectionApi';
-import { MiddlewareArray, combineReducers, configureStore } from '@reduxjs/toolkit';
-import { composeWithDevTools } from 'redux-devtools-extension';
+import { combineReducers, configureStore } from '@reduxjs/toolkit';
 
 const reducers = combineReducers({
     [authApi.reducerPath]: authApi.reducer,
