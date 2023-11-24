@@ -1,9 +1,5 @@
 import { Auth } from '@/widgets/auth';
 
-export default function Home() {
-    return (
-        <>
-            <Auth />
-        </>
-    );
+export default function _Auth() {
+    return <Auth />;
 }
