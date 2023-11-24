@@ -2,7 +2,6 @@ import { ThemeContext, ThemeFactory, Modal, Button } from '@skbkontur/react-ui';
 import styles from './ui.module.scss';
 import { Text } from '@/entities/text';
 import { FlowCard } from '@/features/flowCard';
-import { Divider } from '@/entities/divider';
 
 export const FlowModal = ({ setModalOpen }: { setModalOpen?: (value: boolean) => void }) => {
     function modalClose() {
