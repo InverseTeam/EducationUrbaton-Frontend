@@ -2,6 +2,7 @@
 
 import {
     Gapped,
+    Hint,
     Input,
     Modal,
     Select,
@@ -17,6 +18,9 @@ import { PlusIcon } from '@/entities/icons/plus';
 import { BinIcon } from '@/entities/icons/bin';
 import { Text } from '@/entities/text';
 import { Divider } from '@/entities/divider';
+import { useDispatch } from 'react-redux';
+import { AppDispatch } from '@/shared/lib/store/store';
+import { createGroup } from '@/shared/lib/store/slice/newGroup';
 
 export const NewGroupModal = ({ setModalOpen }: { setModalOpen?: (value: boolean) => void }) => {
     const {
@@ -30,6 +34,8 @@ export const NewGroupModal = ({ setModalOpen }: { setModalOpen?: (value: boolean
         handleAddDayInput,
         handleDeleteDayInput,
     } = ModelNewGroup();
+    const dispatch = useDispatch<AppDispatch>();
+
     const tooltipRef = useRef<Tooltip | null>(null);
     function modalClose() {
         setModalOpen && setModalOpen(false);
@@ -43,7 +49,11 @@ export const NewGroupModal = ({ setModalOpen }: { setModalOpen?: (value: boolean
     useEffect(() => {
         if (!!warnText) handleClickOnShow();
     }, [warnText]);
-    //TODO: нужно сделать изменяемый ModalHeader / Text
+
+    const handleCreateGroup = () => {
+        dispatch(createGroup(dataNewGroup));
+        setModalOpen && setModalOpen(false);
+    };
     return (
         <ThemeContext.Provider value={newGroupModalTheme}>
             <Modal onClose={modalClose}>
@@ -66,54 +76,57 @@ export const NewGroupModal = ({ setModalOpen }: { setModalOpen?: (value: boolean
                                 size="medium"
                                 placeholder="Максимальное количество учеников"
                                 type="number"
-                                value={dataNewGroup.maxStudent}
+                                value={dataNewGroup.max_students?.toString()}
                                 onChange={(e) =>
-                                    handleChangeDataNewGroup('maxStudent', e.target.value)
+                                    handleChangeDataNewGroup('max_students', e.target.value)
                                 }
                             />
                             <Text size={16} type="h3">
                                 Расписание
                             </Text>
-
                             {lessonDays.map((value, index) => (
                                 <Gapped gap={16} key={index}>
                                     <Select
                                         width={'width'}
                                         placeholder="День недели"
                                         items={days}
-                                        value={value.day}
+                                        value={value.week_day}
                                         onValueChange={(e) =>
                                             e !== null &&
-                                            handleChangeLessonsDayInput(index, 'day', e)
+                                            handleChangeLessonsDayInput(index, 'week_day', e)
                                         }
                                         size="medium"
                                     />
-                                    <Input
-                                        type="time"
-                                        placeholder="Время начала"
-                                        value={value.timeStart}
-                                        onChange={(e) =>
-                                            handleChangeLessonsDayInput(
-                                                index,
-                                                'timeStart',
-                                                e.target.value,
-                                            )
-                                        }
-                                        size="medium"
-                                    />
-                                    <Input
-                                        type="time"
-                                        placeholder="Время конца"
-                                        value={value.timeEnd}
-                                        onChange={(e) =>
-                                            handleChangeLessonsDayInput(
-                                                index,
-                                                'timeEnd',
-                                                e.target.value,
-                                            )
-                                        }
-                                        size="medium"
-                                    />
+                                    <Hint useWrapper text="Время начала">
+                                        <Input
+                                            type="time"
+                                            placeholder="Время начала"
+                                            value={value.start_time}
+                                            onChange={(e) =>
+                                                handleChangeLessonsDayInput(
+                                                    index,
+                                                    'start_time',
+                                                    e.target.value,
+                                                )
+                                            }
+                                            size="medium"
+                                        />
+                                    </Hint>
+                                    <Hint text="Время конца">
+                                        <Input
+                                            type="time"
+                                            placeholder="Время конца"
+                                            value={value.end_time}
+                                            onChange={(e) =>
+                                                handleChangeLessonsDayInput(
+                                                    index,
+                                                    'end_time',
+                                                    e.target.value,
+                                                )
+                                            }
+                                            size="medium"
+                                        />
+                                    </Hint>
                                 </Gapped>
                             ))}
                             <span style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
@@ -146,7 +159,13 @@ export const NewGroupModal = ({ setModalOpen }: { setModalOpen?: (value: boolean
 
                     <Modal.Footer>
                         <Gapped>
-                            <Button use="primary" size="medium" disabled={!filled} type="submit">
+                            <Button
+                                borderless
+                                onClick={handleCreateGroup}
+                                use="primary"
+                                size="medium"
+                                disabled={!filled}
+                                type="submit">
                                 Сохранить
                             </Button>
                             <Button onClick={modalClose} use="backless" size="medium">
