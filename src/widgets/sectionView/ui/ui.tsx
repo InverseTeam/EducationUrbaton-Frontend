@@ -12,10 +12,20 @@ import { GroupCard } from '@/features/groupCard';
 import { GroupItems, RatingItems } from '../data';
 import { GroupCreateCard } from '@/features/createCard';
 import { SectionRating } from '@/features/sectionRating';
+import { ISection } from '@/shared/interface/section';
+import { useEffect, useState } from 'react';
+import { GetSectionByID } from '../model';
 
 export const SectionView = ({ id }: { id: number }) => {
     const router = useRouter();
-
+    const [sectionData, setSectionData] = useState<ISection | null>(null);
+    useEffect(() => {
+        const GetSection = async () => {
+            const fetchSection: ISection = await GetSectionByID(GetSectionByID);
+            setSectionData(fetchSection);
+        };
+        GetSection();
+    }, []);
     return (
         <>
             <Layout>
@@ -24,7 +34,7 @@ export const SectionView = ({ id }: { id: number }) => {
                         Мои секции
                     </Title>
                     <Image src={Arrow} width={28} height={28} alt="Иконка" />
-                    <Title>Программирование на Python</Title>
+                    <Title>{Программирование на Python}</Title>
                     <Image
                         style={{ cursor: 'pointer', marginLeft: '8px' }}
                         onClick={() => router.push(`/section/my/${id}/change`)}
@@ -49,9 +59,9 @@ export const SectionView = ({ id }: { id: number }) => {
                 <section className={styles.groups}>
                     <h2 className={styles.title}>Группы</h2>
                     <div className={styles.groupWrap}>
-                        {GroupItems.map((item) => (
+                        {/*GroupItems.map((item) => (
                             <GroupCard key={item.id} item={item} />
-                        ))}
+                        ))*/}
                         <GroupCreateCard onClick={() => {}} title="Добавить группу" />
                     </div>
                 </section>

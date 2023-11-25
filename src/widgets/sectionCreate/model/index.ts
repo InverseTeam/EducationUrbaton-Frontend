@@ -25,16 +25,35 @@ export const daysOfWeek: { [key: string]: number } = {
     Воскресенье: 7,
 };
 
-export const updateDaysOfWeek = (item: any, daysOfWeek: { [key: string]: number }): any => {
-    if (Array.isArray(item)) {
-        return item.map((subItem) => updateDaysOfWeek(subItem, daysOfWeek));
-    } else if (typeof item === 'object' && item !== null) {
-        const updatedObject: any = {};
-        for (const key in item) {
-            updatedObject[key] = updateDaysOfWeek(item[key], daysOfWeek);
-        }
-        return updatedObject;
-    } else {
-        return item;
-    }
+export function addSecondsToSchedule(groups: IGroup[]): IGroup[] {
+    const updatedGroups = groups.map((group) => ({
+        ...group,
+        id: undefined,
+        schedule: group.schedule.map((scheduleItem) => ({
+            ...scheduleItem,
+            id: undefined,
+            start_time: scheduleItem.start_time + ':00',
+            end_time: scheduleItem.end_time + ':00',
+        })),
+    }));
+
+    return updatedGroups;
+}
+
+export const replaceDayOfWeekWithNumber = (groups: IGroup[]): IGroup[] => {
+    const updatedGroups = groups.map((group) => {
+        const updatedGroup: IGroup = { ...group };
+        updatedGroup.schedule = group.schedule.map((schedule) => {
+            const updatedSchedule: ISchedule = { ...schedule };
+            if (schedule.week_day && daysOfWeek[schedule.week_day]) {
+                updatedSchedule.week_day = daysOfWeek[schedule.week_day];
+            }
+            return updatedSchedule;
+        });
+        return updatedGroup;
+    });
+    return updatedGroups;
 };
+
+const gogo: any =
+    '"{"name":"123","description":"123","category":1,"address":"123","groups":[{"name":"123","teacher":1,"students":[],"time":"","total_students":0,"max_students":"123","schedule":[{"week_day":1,"start_time":"01:05:00","end_time":"02:05:00"}],"address":"123"}]}"';

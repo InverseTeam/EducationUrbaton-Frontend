@@ -10,12 +10,17 @@ import { useEffect, useState } from 'react';
 import { GroupCreateCard } from '@/features/createCard';
 import { NewGroupModal } from '@/features/newGroupModal';
 import { useRouter } from 'next/navigation';
-
-import { GetSectionCategories, daysOfWeek, selectedCategory, updateDaysOfWeek } from '../model';
+import {
+    GetSectionCategories,
+    addSecondsToSchedule,
+    replaceDayOfWeekWithNumber,
+    selectedCategory,
+} from '../model';
 import { useSelector } from 'react-redux';
 import { RootState } from '@/shared/lib/store/store';
 import { GroupCard } from '@/features/groupCard';
 import { instanceLogged } from '@/shared/axios';
+import { IUser } from '@/shared/interface/user';
 
 export const SectionCreate = () => {
     const router = useRouter();
@@ -25,7 +30,7 @@ export const SectionCreate = () => {
     const [description, setDescription] = useState<string>('');
     const [modalOpen, setModalOpen] = useState<boolean>(false);
     const [btnDisabled, setBtnDisabled] = useState<boolean>(true);
-
+    const userInfo = useSelector((state: RootState): IUser => state.userReducer);
     useEffect(() => {
         const GetCategories = async () => {
             const fetchCategories: ICategory[] = await GetSectionCategories();
@@ -40,12 +45,22 @@ export const SectionCreate = () => {
         }));
         setCategories(updatedRectangles);
     };
-    const createdGroups = useSelector((state: RootState): IGroup[] | undefined => {
-        return state.newGroupReducer?.map((group) => ({
-            ...group,
-            address: address,
-        }));
-    });
+    const createdGroups: IGroup[] | undefined = useSelector(
+        (state: RootState): IGroup[] | undefined => {
+            const groups = state.newGroupReducer;
+            if (!groups) return undefined;
+            const updatedGroups = addSecondsToSchedule(groups);
+
+            return updatedGroups.map((group) => ({
+                ...group,
+                address: address,
+                teacher: userInfo.id,
+                total_students: 0,
+                time: undefined,
+            }));
+        },
+    );
+
     const createGroup = () => {
         if (address.length > 0) {
             setModalOpen(true);
@@ -69,9 +84,7 @@ export const SectionCreate = () => {
             description: description,
             category: categories && selectedCategory(categories),
             address: address,
-            groups:
-                createdGroups?.map(({ address, ...rest }) => updateDaysOfWeek(rest, daysOfWeek)) ||
-                [],
+            groups: createdGroups && replaceDayOfWeekWithNumber(createdGroups),
         };
         try {
             await instanceLogged.post('/sections/create/', requestData);

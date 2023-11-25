@@ -93,7 +93,11 @@ export const NewGroupModal = ({ setModalOpen }: { setModalOpen?: (value: boolean
                                         value={value.week_day}
                                         onValueChange={(e) =>
                                             e !== null &&
-                                            handleChangeLessonsDayInput(index, 'week_day', e)
+                                            handleChangeLessonsDayInput(
+                                                index,
+                                                'week_day',
+                                                e.toString(),
+                                            )
                                         }
                                         size="medium"
                                     />
