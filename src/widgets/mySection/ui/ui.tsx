@@ -7,7 +7,17 @@ import { ISection } from '@/shared/interface/section';
 import { Layout } from '@/shared/layout/page';
 import { useGetAllSectionsQuery } from '@/features/section/api';
 export const MySection = () => {
-    const { data: SectionItems, isLoading } = useGetAllSectionsQuery();
+
+    const {data: SectionItems, isLoading} = useGetAllSectionsQuery();
+
+
+    const test = SectionItems?.map((section: ISection) => ({
+        id: section.id,
+    }))
+
+    console.log("test",test)
+
+
 
     return (
         <>

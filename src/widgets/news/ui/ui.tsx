@@ -3,19 +3,36 @@
 import { Layout } from '@/shared/layout/page';
 import styles from './ui.module.scss';
 import { Title } from '@/entities/pageTitle';
-import { Checkbox, DropdownMenu, Textarea, ThemeFactory, ThemeContext } from '@skbkontur/react-ui';
+import moment from 'moment';
+import {
+    Checkbox,
+    DropdownMenu,
+    Textarea,
+    ThemeFactory,
+    ThemeContext,
+    Spinner,
+    Select,
+} from '@skbkontur/react-ui';
 import { Button, MenuItem } from '@skbkontur/react-ui';
 import { useState } from 'react';
-import { GroupItems, NewsItems } from '../data';
 import { Text } from '@/entities/text';
 import { ArrowsIcon } from '@/entities/icons/arrows';
 import { NewsCard } from '@/features/newsCard';
+import { newsApi, useCreateNewsMutation, useGetAllNewsQuery } from '@/features/news/api';
+import { INews } from '@/shared/interface/news';
+import { PrepareData } from '@/shared/utils/formatData';
+import { useDispatch } from 'react-redux';
 interface CheckboxState {
     [key: string]: boolean;
 }
 
 export const News: React.FC = () => {
     const [checkboxState, setCheckboxState] = useState<CheckboxState>({});
+
+    const [textNews, setTextNews] = useState<string>('');
+
+    const { data: NewsItems, isLoading } = useGetAllNewsQuery();
+    const [createNews] = useCreateNewsMutation();
 
     const handleCheckboxChange = (id: number) => {
         const idString = id.toString();
@@ -24,6 +41,31 @@ export const News: React.FC = () => {
             [idString]: !prevState[idString],
         }));
     };
+
+    const dispatch = useDispatch();
+
+    if (isLoading) {
+        return <>Loading...</>;
+    }
+
+    console.log('data');
+
+    const handleCreate = async () => {
+        const newsData: INews = {
+            content: textNews,
+            tag: 1,
+        };
+        const res = await createNews(newsData);
+        setTextNews('');
+        // const patchCollection = dispatch(newsApi.util.upsertQueryData('News'));
+    };
+
+    const tags = [
+        'Замена преподавателя',
+        'Изменение в расписании',
+        'Изменение аудитории',
+        'Отмена занятия',
+    ];
 
     return (
         <>
@@ -37,9 +79,21 @@ export const News: React.FC = () => {
                         showLengthCounter
                         autoResize
                         placeholder="Текст новости"
+                        value={textNews}
+                        onChange={(e) => setTextNews(e.target.value)}
                     />
                     <section className={styles.group}>
-                        <DropdownMenu caption={<Button size="medium">Получатели</Button>}>
+                        <Select
+                            width={'width'}
+                            placeholder="Тэг"
+                            items={tags}
+                            // value={value.week_day}
+                            // onValueChange={(e) =>
+                            //     e !== null && handleChangeLessonsDayInput(index, 'week_day', e)
+                            // }
+                            size="medium"
+                        />
+                        {/* <DropdownMenu caption={<Button size="medium">Получатели</Button>}>
                             {GroupItems.map((item) => (
                                 <MenuItem
                                     key={item.id}
@@ -50,8 +104,8 @@ export const News: React.FC = () => {
                                     </Checkbox>
                                 </MenuItem>
                             ))}
-                        </DropdownMenu>
-                        <Button use="primary" size="medium">
+                        </DropdownMenu> */}
+                        <Button use="primary" size="medium" onClick={handleCreate}>
                             Отправить
                         </Button>
                     </section>
@@ -60,14 +114,21 @@ export const News: React.FC = () => {
                             <Text size={22} type="h2" weight={500}>
                                 Остальные новости
                             </Text>
-                            <Button icon={<ArrowsIcon />} size="medium" use="text">
+                            <Button
+                                icon={<ArrowsIcon />}
+                                size="medium"
+                                use="text"
+                                onClick={() => {
+                                    location.reload();
+                                }}>
                                 Обновить
                             </Button>
                         </div>
                         <div className={styles.row}>
-                            {NewsItems.map((item) => (
-                                <NewsCard item={item} key={item.id} />
-                            ))}
+                            {NewsItems &&
+                                NewsItems.slice(0)
+                                    .reverse()
+                                    .map((item) => <NewsCard item={item} key={item.id} />)}
                         </div>
                     </section>
                 </Layout>

@@ -1,9 +1,9 @@
-import { User } from './user';
+import { IUser, User } from './user';
 
 export interface INews {
-    id: number;
-    user?: User;
-    time?: string;
-    data?: string;
-    message: string;
+    id?: number;
+    author?: IUser;
+    timedate?: string;
+    content: string;
+    tag: number;
 }
