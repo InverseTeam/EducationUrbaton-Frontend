@@ -1,4 +1,4 @@
-"use client"
+'use client';
 
 import { Title } from '@/entities/pageTitle';
 import styles from './ui.module.scss';
@@ -24,10 +24,10 @@ export const MySection = () => {
             <Layout>
                 <Title>Мои секции</Title>
                 <div className={styles.cardWrap}>
-
-                    {SectionItems && SectionItems.map((item: ISection) => (
-                        <SectionCard key={item.id} item={item} />
-                    ))}
+                    {SectionItems &&
+                        SectionItems.map((item: ISection) => (
+                            <SectionCard key={item.id} item={item} />
+                        ))}
                 </div>
             </Layout>
         </>

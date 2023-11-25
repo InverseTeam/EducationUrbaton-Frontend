@@ -36,7 +36,7 @@ export interface IUser {
     lastname: string;
     surname: string;
     class: IClass;
-    school: [];
+    school: ISchool;
     achievements: IAchievements;
     snils: string;
     role: IRole;

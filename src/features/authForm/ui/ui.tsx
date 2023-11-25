@@ -2,13 +2,15 @@
 
 import { NavLogo } from '@/entities/header/navLogo';
 import styles from './ui.module.scss';
-import { Button, Input, ThemeContext, ThemeFactory, Tooltip } from '@skbkontur/react-ui';
+import { Button, Input, ThemeContext, ThemeFactory, Toast } from '@skbkontur/react-ui';
 import { FormEvent, useEffect, useState } from 'react';
 import { useAuthUserMutation } from '../api';
 import { IAuth, IError, IResponseAuth } from '@/shared/interface/auth';
 import { useRouter } from 'next/navigation';
 import { useDispatch } from 'react-redux';
 import { sectionApi } from '@/features/section/api/sectionApi';
+import { setCookie } from '@/shared/lib/setCookie';
+import { getAccessToken } from '@/shared/authHelpers/auth';
 
 export const AuthForm = () => {
     const [login, { error, isLoading }] = useAuthUserMutation();
@@ -16,33 +18,20 @@ export const AuthForm = () => {
     const dispatch = useDispatch();
 
     const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+        router.prefetch('/section/my');
         e.preventDefault();
 
         dispatch(sectionApi.util.resetApiState());
         if (typeof window !== 'undefined') {
-            localStorage.removeItem('token');
-
-            console.log(formData)
-
             const responseAuth = await login(formData as IAuth);
 
-        
-            const tokenAuth = (responseAuth as IResponseAuth).data?.auth_token;
+            const authToken = (responseAuth as IResponseAuth).data?.auth_token;
 
-            localStorage.setItem('token', tokenAuth);
+            authToken && setCookie('accessToken', authToken, { expires: 30, path: '/' });
         }
-
-        router.push('/section/my');
+        const accessToken = getAccessToken();
+        !!accessToken ? router.push('/section/my') : showComplexNotification();
     };
-
-    useEffect(() => {
-        if (error) {
-          const errorStatus = (error as IError).status;
-          if (errorStatus == 400) {
-            alert('Неверный логин или пароль');
-          }
-        }
-      }, [error]);
 
     const [formData, setFormData] = useState<IAuth>({
         email: '',
@@ -60,43 +49,47 @@ export const AuthForm = () => {
             setBtnDisabled(false);
         } else setBtnDisabled(true);
     }, [formData.email, formData.password]);
-
+    function showComplexNotification() {
+        Toast.push('Неверная почта или пароль', {
+            label: 'Отмена',
+            handler: () => Toast.push('Отменить'),
+        });
+    }
     return (
         <>
             <ThemeContext.Provider value={AuthTheme}>
-                <Tooltip render={TooltipFormRender} pos="right middle">
-                    <form className={styles.form} onSubmit={handleSubmit}>
-                        <NavLogo />
-                        <span className={styles.input}>
-                            <Input
-                                onChange={(e) => handleInputChange('email', e.target.value)}
-                                value={formData.email}
-                                placeholder="Почта"
-                                width={'100%'}
-                                size="large"
-                            />
-
-                            <Input
-                                onChange={(e) => handleInputChange('password', e.target.value)}
-                                value={formData.password}
-                                placeholder="Пароль"
-                                type="password"
-                                width={'100%'}
-                                size="large"
-                            />
-                        </span>
-                        <Button
+                <form className={styles.form} onSubmit={handleSubmit}>
+                    <NavLogo />
+                    <span className={styles.input}>
+                        <Input
+                            onChange={(e) => handleInputChange('email', e.target.value)}
+                            value={formData.email}
+                            placeholder="Почта"
                             width={'100%'}
-                            use="primary"
-                            disabled={btnDisabled}
                             size="large"
-                            borderless
-                            type="submit"
-                            style={{ marginTop: '4px' }}>
-                            Войти
-                        </Button>
-                    </form>
-                </Tooltip>
+                        />
+
+                        <Input
+                            onChange={(e) => handleInputChange('password', e.target.value)}
+                            value={formData.password}
+                            placeholder="Пароль"
+                            type="password"
+                            width={'100%'}
+                            size="large"
+                        />
+                    </span>
+                    <Button
+                        width={'100%'}
+                        use="primary"
+                        disabled={btnDisabled}
+                        size="large"
+                        borderless
+                        loading={isLoading}
+                        type="submit"
+                        style={{ marginTop: '4px' }}>
+                        Войти
+                    </Button>
+                </form>
             </ThemeContext.Provider>
         </>
     );

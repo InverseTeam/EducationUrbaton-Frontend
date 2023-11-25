@@ -1,5 +1,5 @@
+import { getAccessToken } from '@/shared/authHelpers/auth';
 import { BASE_API } from '@/shared/constants';
-import { ISection } from '@/shared/interface/section';
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
 export const sectionApi = createApi({
@@ -7,9 +7,7 @@ export const sectionApi = createApi({
     baseQuery: fetchBaseQuery({
         baseUrl: BASE_API,
         headers: {
-            Authorization: `Token ${
-                typeof window !== 'undefined' ? localStorage.getItem('token') : ''
-            }`,
+            Authorization: `Token ${typeof window !== 'undefined' ? getAccessToken() : ''}`,
         },
         
         
@@ -20,4 +18,3 @@ export const sectionApi = createApi({
 
     endpoints: () => ({}),
 });
-
