@@ -3,12 +3,18 @@ import styles from './ui.module.scss';
 import { Button, ThemeContext, ThemeFactory } from '@skbkontur/react-ui';
 import Location from '../../../../public/globalIcons/location.svg';
 import User from '../../../../public/globalIcons/user.svg';
-import { IGroup } from '@/shared/interface/section';
+import { IGroup, ISchedule } from '@/shared/interface/section';
 import { RootState } from '@/shared/lib/store/store';
 import { IUser } from '@/shared/interface/user';
 import { useSelector } from 'react-redux';
-export const GroupCard = ({ item }: { item: IGroup }) => {
+export const GroupCard = ({ item, address }: { item: IGroup; address?: string }) => {
     const userInfo = useSelector((state: RootState): IUser => state.userReducer);
+    const convertTime = (inputTime: string): string => {
+        const timeParts = inputTime.split(':');
+        const formattedTime = `${timeParts[0]}:${timeParts[1]}`;
+
+        return formattedTime;
+    };
     return (
         <>
             <ThemeContext.Provider value={GroupCardTheme}>
@@ -24,13 +30,17 @@ export const GroupCard = ({ item }: { item: IGroup }) => {
                         <span className={styles.row}>
                             <Image src={Location} width={18} height={18} alt="Местоположение" />
                             <h4 className={styles.row__text}>
-                                {item.address ? item.address : 'Местоположение не найдено'}
+                                {address || 'Местоположение не найдено'}
                             </h4>
                         </span>
                     </section>
                     <section className={styles.sectionRow}>
                         <Button borderless use="primary" size="small">
-                            {item.schedule[0].start_time}
+                            {item.schedules
+                                ? item.schedules?.map((item: ISchedule) =>
+                                      convertTime(item.start_time),
+                                  )
+                                : 'Не найдено'}
                         </Button>
                     </section>
                 </article>

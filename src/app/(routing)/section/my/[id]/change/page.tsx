@@ -3,7 +3,7 @@ import { SectionChange } from '@/widgets/sectionChange';
 export default function Edit({ params }: { params: { id: number } }) {
     return (
         <>
-            <SectionChange />
+            <SectionChange id={params.id} />
         </>
     );
 }

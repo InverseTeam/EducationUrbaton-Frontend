@@ -29,7 +29,7 @@ export function addSecondsToSchedule(groups: IGroup[]): IGroup[] {
     const updatedGroups = groups.map((group) => ({
         ...group,
         id: undefined,
-        schedule: group.schedule.map((scheduleItem) => ({
+        schedule: group.schedules.map((scheduleItem) => ({
             ...scheduleItem,
             id: undefined,
             start_time: scheduleItem.start_time + ':00',
@@ -43,7 +43,7 @@ export function addSecondsToSchedule(groups: IGroup[]): IGroup[] {
 export const replaceDayOfWeekWithNumber = (groups: IGroup[]): IGroup[] => {
     const updatedGroups = groups.map((group) => {
         const updatedGroup: IGroup = { ...group };
-        updatedGroup.schedule = group.schedule.map((schedule) => {
+        updatedGroup.schedules = group.schedules.map((schedule) => {
             const updatedSchedule: ISchedule = { ...schedule };
             if (schedule.week_day && daysOfWeek[schedule.week_day]) {
                 updatedSchedule.week_day = daysOfWeek[schedule.week_day];
