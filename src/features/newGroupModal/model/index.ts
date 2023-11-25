@@ -13,9 +13,8 @@ export const ModelNewGroup = () => {
     const [dataNewGroup, setDataNewGroup] = useState<IGroup>({
         id: null,
         name: '',
-        teacher: {} as IUser,
+        teacher: undefined,
         students: [],
-        time: '',
         total_students: null,
         max_students: null,
         schedule: [] as ISchedule[],

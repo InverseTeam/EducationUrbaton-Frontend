@@ -72,11 +72,11 @@ export interface ICategory {
 }
 
 export interface IGroup {
-    id: number | null;
+    id?: number | null;
     name: string;
-    teacher: IUser;
+    teacher?: number;
     students: IUser[];
-    time: string;
+    time?: undefined;
     schedule: ISchedule[];
     total_students: number | null;
     max_students: number | null;
@@ -91,8 +91,8 @@ export interface IHomework {
 }
 
 export interface ISchedule {
-    id: number | null;
-    week_day?: string | null; // number
+    id?: number | null;
+    week_day?: string | null | number; // number
     start_time: string;
     end_time: string;
 }
