@@ -1,5 +1,6 @@
 import { ISection } from '@/shared/interface/section';
 import { sectionApi } from './sectionApi';
+import { getAccessToken } from '@/shared/authHelpers/auth';
 
 const getSectionApi = sectionApi.injectEndpoints({
     endpoints: (build) => ({
@@ -8,7 +9,7 @@ const getSectionApi = sectionApi.injectEndpoints({
                 url: '/sections/',
                 method: 'GET',  
                 headers: {
-                    Authorization: `Token ${localStorage.getItem('token')}`,
+                    Authorization: `Token ${getAccessToken()}`,
                 },
             }),
 
@@ -21,10 +22,12 @@ const getSectionApi = sectionApi.injectEndpoints({
             //     : [{ type: 'Sections', id: 'LIST' }],
         }),
 
-        getSection: build.query<ISection[], number>({
+        getSection: build.query<ISection, number>({
             query: (id) => ({
-                url: `/sections/${id}`,
+                url: `/sections/${id}/`,
                 method: 'GET',
+                
+               
             }),
         }),
     }),

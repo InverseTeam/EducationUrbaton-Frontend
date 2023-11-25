@@ -31,7 +31,7 @@ import { SectionView } from '@/widgets/sectionView';
 // }
 
 
-export default function OneSection({ params }: { params: { id: string } }) {
+export default function OneSection({ params }: { params: { id: number } }) {
     // console.log(SectionItems);
 
     return (

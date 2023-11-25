@@ -18,7 +18,7 @@ export const ModelNewGroup = () => {
         time: '',
         total_students: null,
         max_students: null,
-        schedule: [] as ISchedule[],
+        schedules: [] as ISchedule[],
     });
     const days: string[] = [
         'Понедельник',

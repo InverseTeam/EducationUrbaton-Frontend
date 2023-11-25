@@ -5,7 +5,7 @@ import styles from './ui.module.scss';
 import { Title } from '@/entities/pageTitle';
 import { Button, Input, Textarea, ThemeContext, ThemeFactory } from '@skbkontur/react-ui';
 import { CategoryItem } from '@/entities/categoryItem';
-import { Category } from '@/shared/interface/section';
+import { Category, IGroup } from '@/shared/interface/section';
 import { CategoryItems, GroupItems } from '../data';
 import { useState } from 'react';
 import { GroupCreateCard } from '@/features/createCard';

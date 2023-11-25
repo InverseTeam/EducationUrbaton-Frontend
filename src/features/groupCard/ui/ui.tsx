@@ -3,11 +3,12 @@ import styles from './ui.module.scss';
 import { Button, ThemeContext, ThemeFactory } from '@skbkontur/react-ui';
 import Location from '../../../../public/globalIcons/location.svg';
 import User from '../../../../public/globalIcons/user.svg';
-import { IGroup } from '@/shared/interface/section';
+import { Group, IGroup } from '@/shared/interface/section';
 import { RootState } from '@/shared/lib/store/store';
 import { IUser } from '@/shared/interface/user';
 import { useSelector } from 'react-redux';
 export const GroupCard = ({ item }: { item: IGroup }) => {
+
     const userInfo = useSelector((state: RootState): IUser => state.userReducer);
     return (
         <>
@@ -30,7 +31,7 @@ export const GroupCard = ({ item }: { item: IGroup }) => {
                     </section>
                     <section className={styles.sectionRow}>
                         <Button borderless use="primary" size="small">
-                            {item.schedule[0].start_time}
+                            {item.schedules[0].start_time.slice(0,5)}
                         </Button>
                     </section>
                 </article>
