@@ -77,7 +77,7 @@ export interface IGroup {
     teacher?: number;
     students: IUser[];
     time?: undefined;
-    schedule: ISchedule[];
+    schedules: ISchedule[];
     total_students: number | null;
     max_students: number | null;
     address?: string | undefined;

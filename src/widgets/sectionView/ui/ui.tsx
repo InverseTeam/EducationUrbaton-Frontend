@@ -8,24 +8,25 @@ import Image from 'next/image';
 import Arrow from '../../../../public/globalIcons/arrow.svg';
 import EditPen from '../../../../public/globalIcons/editPen.svg';
 import { Feedbacks } from '@/features/feedbacks';
-import { GroupCard } from '@/features/groupCard';
-import { GroupItems, RatingItems } from '../data';
+import { RatingItems } from '../data';
 import { GroupCreateCard } from '@/features/createCard';
 import { SectionRating } from '@/features/sectionRating';
 import { ISection } from '@/shared/interface/section';
 import { useEffect, useState } from 'react';
 import { GetSectionByID } from '../model';
+import { GroupCard } from '@/features/groupCard';
 
 export const SectionView = ({ id }: { id: number }) => {
     const router = useRouter();
     const [sectionData, setSectionData] = useState<ISection | null>(null);
     useEffect(() => {
         const GetSection = async () => {
-            const fetchSection: ISection = await GetSectionByID(GetSectionByID);
+            const fetchSection: ISection = await GetSectionByID({ id });
             setSectionData(fetchSection);
         };
         GetSection();
     }, []);
+   
     return (
         <>
             <Layout>
@@ -34,7 +35,7 @@ export const SectionView = ({ id }: { id: number }) => {
                         Мои секции
                     </Title>
                     <Image src={Arrow} width={28} height={28} alt="Иконка" />
-                    <Title>{Программирование на Python}</Title>
+                    <Title>{sectionData?.name}</Title>
                     <Image
                         style={{ cursor: 'pointer', marginLeft: '8px' }}
                         onClick={() => router.push(`/section/my/${id}/change`)}
@@ -46,22 +47,19 @@ export const SectionView = ({ id }: { id: number }) => {
                 </section>
                 <section className={styles.info}>
                     <button className={styles.category} type="button">
-                        Технический
+                        {sectionData?.category.name}
                     </button>
                     <Feedbacks />
                 </section>
                 <section className={styles.description}>
-                    <p className={styles.desc}>
-                        Для школьников у нас есть специальная секция по программированию, где они
-                        смогут узнать все основы создания игр, приложений и веб-сайтов.
-                    </p>
+                    <p className={styles.desc}>{sectionData?.description}</p>
                 </section>
                 <section className={styles.groups}>
                     <h2 className={styles.title}>Группы</h2>
                     <div className={styles.groupWrap}>
-                        {/*GroupItems.map((item) => (
-                            <GroupCard key={item.id} item={item} />
-                        ))*/}
+                        {sectionData?.groups.map((item) => (
+                            <GroupCard address={sectionData.address} key={item.id} item={item} />
+                        ))}
                         <GroupCreateCard onClick={() => {}} title="Добавить группу" />
                     </div>
                 </section>

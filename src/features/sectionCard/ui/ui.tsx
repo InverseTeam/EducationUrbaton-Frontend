@@ -25,7 +25,7 @@ export const SectionCard = ({ item }: { item: ISection }) => {
                     <section className={styles.info}>
                         <h4 className={styles.title}>{item.name}</h4>
                         <div className={styles.groupRow}>
-                            {item.groups ? (
+                            {item.groups?.length > 0 ? (
                                 item.groups.map((group) => (
                                     <Button key={group.id} borderless use="primary" size="small">
                                         {group.name}

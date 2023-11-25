@@ -3,7 +3,7 @@
 import { Title } from '@/entities/pageTitle';
 import styles from './ui.module.scss';
 import { SectionCard } from '@/features/sectionCard';
-import { ISection, Section } from '@/shared/interface/section';
+import { ISection } from '@/shared/interface/section';
 import { Layout } from '@/shared/layout/page';
 import { useGetAllSectionsQuery } from '@/features/section/api';
 export const MySection = () => {
